@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UID Verification</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: linear-gradient(to bottom right, #f0f8ff, #c2e9fb);
+      padding: 40px;
+      text-align: center;
+    }
+    input {
+      padding: 12px;
+      font-size: 16px;
+      width: 300px;
+      border-radius: 8px;
+      border: 1px solid #888;
+    }
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      margin-top: 20px;
+      border-radius: 8px;
+      border: none;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h2>🔎 Enter UID for Verification</h2>
+  <input type="text" id="enteredUID" placeholder="Enter scanned UID">
+  <br>
+  <button onclick="verifyUID()">Verify</button>
+
+  <script>
+    function verifyUID() {
+      const enteredUID = document.getElementById("enteredUID").value.trim();
+      const scannedUID = sessionStorage.getItem("scannedUID");
+
+      if (!scannedUID) {
+        alert("QR not scanned. Please scan the certificate first.");
+        return;
+      }
+
+      if (enteredUID === scannedUID) {
+        // Store again for use in next page (optional)
+        sessionStorage.setItem("verifiedUID", enteredUID);
+        window.location.href = "certificate.html";
+      } else {
+        alert("❌ UID does not match the scanned QR. Try again.");
+      }
+    }
+  </script>
+</body>
+</html>

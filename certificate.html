@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Certificate</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: #f3f3f3;
+      padding: 50px;
+    }
+
+    .certificate-box {
+      width: 800px;
+      max-width: 100%;
+      margin: auto;
+      padding: 40px;
+      background: white;
+      border: 10px solid #2c3e50;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+
+    .certificate-box h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+
+    .certificate-box h2 {
+      font-size: 24px;
+      margin: 10px 0;
+      color: #555;
+    }
+
+    .certificate-box p {
+      font-size: 18px;
+      margin: 10px 0;
+      color: #444;
+    }
+
+    .certificate-number {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      font-size: 14px;
+      color: #888;
+    }
+
+    .signatures {
+      margin-top: 50px;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+
+    .sign-box {
+      text-align: center;
+    }
+
+    .sign-box img {
+      width: 150px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .sign-box p {
+      margin-top: 5px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .action-buttons {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .action-buttons button {
+      padding: 12px 24px;
+      font-size: 16px;
+      margin: 10px;
+      border-radius: 8px;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    .accept {
+      background-color: #28a745;
+    }
+
+    .reject {
+      background-color: #dc3545;
+    }
+
+    #statusMsg {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #333;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="certificate-box">
+    <div class="certificate-number">Certificate No: CERT-2025-2028</div>
+    <h1>Certificate of Achievement</h1>
+    <h2>This is to Certify That</h2>
+    <h1 style="font-size: 30px; color: #000;">John Doe</h1>
+    <p>has successfully completed the course</p>
+    <h2 style="color: #000;">Advanced Data Analytics</h2>
+    <p>with outstanding performance and dedication</p>
+    <p><strong>Issued Date:</strong> 25 July 2025</p>
+    <p><strong>Verified UID:</strong> <span id="uid"></span></p>
+
+    <div class="signatures">
+      <div class="sign-box">
+        <img src="https://raw.githubusercontent.com/abrahamcalf/programmer-signatures/main/signatures/director-sign.png" alt="Director Signature">
+        <p>Director</p>
+      </div>
+      <div class="sign-box">
+        <img src="https://raw.githubusercontent.com/abrahamcalf/programmer-signatures/main/signatures/hr-signature.png" alt="HR Signature">
+        <p>HR Authority</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="action-buttons">
+    <button class="accept" onclick="acceptCertificate()">✅ Accept Certificate</button>
+    <button class="reject" onclick="rejectCertificate()">❌ Reject Certificate</button>
+  </div>
+
+  <div id="statusMsg"></div>
+
+  <script>
+    const uid = sessionStorage.getItem("verifiedUID");
+    document.getElementById("uid").innerText = uid || "Unknown UID";
+
+    function disableButtons() {
+      document.querySelector(".accept").disabled = true;
+      document.querySelector(".reject").disabled = true;
+    }
+
+    function acceptCertificate() {
+      document.getElementById("statusMsg").innerText = "✅ Certificate Accepted";
+      document.getElementById("statusMsg").style.color = "green";
+      disableButtons();
+    }
+
+    function rejectCertificate() {
+      document.getElementById("statusMsg").innerText = "❌ Certificate Rejected";
+      document.getElementById("statusMsg").style.color = "red";
+      disableButtons();
+    }
+  </script>
+</body>
+</html>

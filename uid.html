@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scan Certificate QR</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: linear-gradient(to right, #83a4d4, #b6fbff);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      padding-top: 80px;
+    }
+
+    h2 {
+      font-size: 28px;
+      color: #2c3e50;
+      margin-bottom: 30px;
+    }
+
+    #qr-video {
+      width: 400px;
+      max-width: 90%;
+      border: 5px solid #333;
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    }
+
+    p {
+      font-size: 16px;
+      margin-top: 20px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h2>📷 Scan Certificate QR</h2>
+  <video id="qr-video" autoplay></video>
+  <p>Hold the certificate QR code in front of your camera.</p>
+
+  <script type="module">
+    import QrScanner from './qr-scanner.min.js';
+    QrScanner.WORKER_PATH = './qr-scanner-worker.min.js';
+
+    const video = document.getElementById('qr-video');
+
+    const scanner = new QrScanner(video, result => {
+      scanner.stop();
+
+      const scannedUID = result.data || result;
+
+      // Save UID to session
+      sessionStorage.setItem("scannedUID", scannedUID);
+
+      alert("✅ QR Scanned Successfully! Now enter UID manually to verify.");
+      // No redirect — user will manually go to dashboard page
+    }, {
+      returnDetailedScanResult: true
+    });
+
+    scanner.start();
+  </script>
+</body>
+</html>

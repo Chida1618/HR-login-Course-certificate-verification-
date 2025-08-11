@@ -1,0 +1,18 @@
+function verifyUID() {
+  const enteredUID = document.getElementById("uid-input").value.trim();
+  const scannedUID = sessionStorage.getItem("scannedUID");
+  const message = document.getElementById("message");
+  const certSection = document.getElementById("certificate-section");
+
+  if (enteredUID === scannedUID) {
+    message.innerText = "";
+    certSection.style.display = "block";
+
+    // Fill in certificate data
+    document.getElementById("cert-uid").innerText = scannedUID;
+    document.getElementById("cert-date").innerText = new Date().toLocaleDateString();
+  } else {
+    certSection.style.display = "none";
+    message.innerText = "❌ UID does not match!";
+  }
+}
